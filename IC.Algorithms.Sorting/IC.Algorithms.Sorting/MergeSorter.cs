@@ -11,13 +11,16 @@ namespace IC.Algorithms.Sorting
     /// </summary>
     internal class MergeSorter
     {
+        // does not count created arrays from Slice ext
+        int _arraysCreated = 0;
+
         public int[] Sort(int[] unsortedArray)
         {
             if (unsortedArray == null)
                 throw new ArgumentNullException(nameof(unsortedArray));
 
             // there is nothing to divide
-            if (unsortedArray.Length == 1)
+            if (unsortedArray.Length <= 1)
             {
                 Console.WriteLine($"Array of {unsortedArray.Format()} is only one item long and is 'sorted'");
                 return unsortedArray;
@@ -34,6 +37,8 @@ namespace IC.Algorithms.Sorting
 
             int[] leftPart = unsortedArray.Slice(0, midpoint - 1);
             int[] rightPart = unsortedArray.Slice(midpoint, unsortedArray.Length - 1);
+            //_arraysCreated += 2;
+
             Console.WriteLine($"Divided array to left: {leftPart.Format()} and right: {rightPart.Format()}");
 
             // Conquer
@@ -41,13 +46,14 @@ namespace IC.Algorithms.Sorting
 
             int[] leftPartSorted = Sort(leftPart);
             int[] rightPartSorted = Sort(rightPart);
-            Console.WriteLine($"Sorted left: {leftPartSorted.Format()} and right: {rightPartSorted.Format()}");
+            Console.WriteLine($"\nSorted left: {leftPartSorted.Format()} and right: {rightPartSorted.Format()}");
 
             // Combine
             //
 
             sortedArray = Merge(leftPartSorted, rightPartSorted);
             Console.WriteLine($"Sorted left & right: {sortedArray.Format()}");
+            Console.WriteLine($"Arrays created: {_arraysCreated}");
 
             Console.WriteLine($"==========================\n");
 
@@ -58,6 +64,8 @@ namespace IC.Algorithms.Sorting
         {
             Console.WriteLine($"- Merge {left.Format()} and {right.Format()}");
             int[] output = new int[left.Length + right.Length];
+            _arraysCreated++;
+            Console.WriteLine("+ array created");
 
             int i = 0;
             int j = 0;
