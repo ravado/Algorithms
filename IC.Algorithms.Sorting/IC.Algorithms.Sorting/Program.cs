@@ -4,9 +4,9 @@ int[] unsortedArray = [1, 9, 2, 93, 4, 5, 2, 5];
 int[] sortedArray = [0];
 
 var mergeSorter = new MergeSorter();
-Console.WriteLine("Using MergeSorter to sort: \t" + string.Join(", ", unsortedArray));
+Console.WriteLine("Using MergeSorter to sort: \t" + unsortedArray.Format());
 
 sortedArray = mergeSorter.Sort(unsortedArray);
-Console.WriteLine("Sorted: \t\t\t" + string.Join(", ", sortedArray));
+Console.WriteLine($"Sorted: \n{unsortedArray.Format()} --> {sortedArray.Format()}");
 
 Console.ReadKey();
