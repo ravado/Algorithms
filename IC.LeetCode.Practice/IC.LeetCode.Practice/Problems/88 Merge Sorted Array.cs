@@ -37,20 +37,74 @@ namespace IC.LeetCode.Practice.Problems
     {
         public void Invoke()
         {
-            int[] nums1 = [1, 2, 3, 0, 0, 0];
-            int[] nums1Original = (int[])nums1.Clone(); // keep just for logs
+            // Case 1
+            //int[] nums1 = [1, 2, 3, 0, 0, 0];
+            //int m = 3;
+            //int[] nums2 = [2, 5, 6];
+            //int n = 3;
 
-            int m = 3;
-            int[] nums2 = [2, 5, 6];
-            int n = 3;
+            // Case 2
+            //int[] nums1 = [1];
+            //int m = 1;
+            //int[] nums2 = [];
+            //int n = 0;
+
+            // Case 3
+            int[] nums1 = [0];
+            int m = 0;
+            int[] nums2 = [1];
+            int n = 1;
+
+            int[] nums1Original = (int[])nums1.Clone(); // keep just for logs
             Merge(nums1, m, nums2, n);
 
-            Console.WriteLine($"Modified array nums1 from: \n {nums1Original.Format()}\n==>\n{nums1}");
+            Console.WriteLine($"Modified array nums1 from:\n{nums1Original.Format()}\n==>\n{nums1.Format()}");
         }
+
         public void Merge(int[] nums1, int m, int[] nums2, int n)
         {
+            int leftCount = m;
+            int rightCount = n;
+            int totalCount = nums1.Length;
 
+            // place all numbers from nums2 into right portion of nums1
+            // so we have all numbers inside of one array
+            int i = leftCount;
+            int j = 0;
+            while (i < totalCount && j < rightCount)
+            {
+                nums1[i] = nums2[j];
+                i++;
+                j++;
+            }
+
+            Console.WriteLine($"Combined both arrays:\n{nums1.Format()}");
+
+            Sort(nums1);
+
+            Console.WriteLine($"Sorted:\n{nums1.Format()}");
         }
+
+        private void Sort(int[] nums1)
+        {
+            // simple bubble sort
+            if (nums1 == null || nums1.Length <= 1)
+                return;
+
+            for (int i = 0; i < nums1.Length; i++)
+            {
+                for (int j = i + 1; j < nums1.Length; j++)
+                {
+                    if (nums1[i] > nums1[j])
+                    {
+                        int toSwap = nums1[i];
+                        nums1[i] = nums1[j];
+                        nums1[j] = toSwap;
+                    }
+                }
+            }
+        }
+
 
         public override string ToString()
         {
