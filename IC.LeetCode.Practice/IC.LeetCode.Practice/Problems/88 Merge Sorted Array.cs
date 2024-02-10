@@ -38,10 +38,10 @@ namespace IC.LeetCode.Practice.Problems
         public void Invoke()
         {
             // Case 1
-            //int[] nums1 = [1, 2, 3, 0, 0, 0];
-            //int m = 3;
-            //int[] nums2 = [2, 5, 6];
-            //int n = 3;
+            int[] nums1 = [1, 2, 3, 0, 0, 0];
+            int m = 3;
+            int[] nums2 = [2, 5, 6];
+            int n = 3;
 
             // Case 2
             //int[] nums1 = [1];
@@ -50,17 +50,21 @@ namespace IC.LeetCode.Practice.Problems
             //int n = 0;
 
             // Case 3
-            int[] nums1 = [0];
-            int m = 0;
-            int[] nums2 = [1];
-            int n = 1;
+            //int[] nums1 = [0];
+            //int m = 0;
+            //int[] nums2 = [1];
+            //int n = 1;
 
             int[] nums1Original = (int[])nums1.Clone(); // keep just for logs
-            Merge(nums1, m, nums2, n);
+            //Merge(nums1, m, nums2, n);
+            MergeEfficient(nums1, m, nums2, n);
 
             Console.WriteLine($"Modified array nums1 from:\n{nums1Original.Format()}\n==>\n{nums1.Format()}");
         }
 
+        /// <summary>
+        /// My first attempt
+        /// </summary>
         public void Merge(int[] nums1, int m, int[] nums2, int n)
         {
             int leftCount = m;
@@ -85,9 +89,44 @@ namespace IC.LeetCode.Practice.Problems
             Console.WriteLine($"Sorted:\n{nums1.Format()}");
         }
 
+        /// <summary>
+        /// Merge Two Sorted Arrays (C# || TC : O(m+n)) || SC : O(1) || Two Pointer Approach
+        /// 
+        /// Time complexity:
+        /// O(m+n) // As we are traversing to total elements i.e m+n
+        /// 
+        /// Space complexity:
+        /// O(1) // We are not creating any extra space
+        /// </summary>
+        public void MergeEfficient(int[] nums1, int m, int[] nums2, int n)
+        {
+            int leftIndex = m - 1;
+            int rightIndex = n - 1;
+            int fullIndex = n + m - 1;
+
+
+            while (rightIndex >= 0)
+            {
+                if (leftIndex >= 0 && nums1[leftIndex] > nums2[rightIndex])
+                {
+                    nums1[fullIndex] = nums1[leftIndex];
+                    leftIndex--;
+                    fullIndex--;
+                }
+                else
+                {
+                    nums1[fullIndex] = nums2[rightIndex];
+                    rightIndex--;
+                    fullIndex--;
+                }
+            }
+           
+            Console.WriteLine($"Sorted:\n{nums1.Format()}");
+        }
+
         private void Sort(int[] nums1)
         {
-            // simple bubble sort
+            // simple selection sort
             if (nums1 == null || nums1.Length <= 1)
                 return;
 
