@@ -6,7 +6,7 @@ namespace IC.LeetCode.Practice
     {
         static void Main(string[] args)
         {
-            IProblem problem = new Problem100();
+            IProblem problem = new Problem226();
 
 
             Console.WriteLine($"Invoking Problem {problem.ToString()}");
