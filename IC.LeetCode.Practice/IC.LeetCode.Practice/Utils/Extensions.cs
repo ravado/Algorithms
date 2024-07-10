@@ -22,5 +22,22 @@ namespace IC.LeetCode.Practice.Utils
         {
             return "[" + string.Join(", ", source) + "]";
         }
+
+        public static int[] ConvertToArray(this ListNode list)
+        {
+            var result = new List<int>();
+            if (list == null)
+                return result.ToArray();
+
+            result.Add(list.val);
+            while (list.next != null)
+            {
+                list = list.next;
+                result.Add(list.val);
+            }
+
+
+            return result.ToArray();
+        }
     }
 }

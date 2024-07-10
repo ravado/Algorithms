@@ -43,29 +43,12 @@ namespace IC.LeetCode.Practice.Problems
             //ListNode list1 = new ListNode();
             //ListNode list2 = new ListNode(0);
 
-            Console.WriteLine($"Merging lists {ConvertToArray(list1).Format()} and {ConvertToArray(list2).Format()}");
+            Console.WriteLine($"Merging lists {list1.ConvertToArray().Format()} and {list2.ConvertToArray().Format()}");
 
             //ListNode result = MergeTwoLists(list1, list2);
             ListNode result = MergeTwoListsRecursively(list1, list2);
 
-            Console.WriteLine($"\n==>\n{ConvertToArray(result).Format()}");
-        }
-
-        public int[] ConvertToArray(ListNode list)
-        {
-            var result = new List<int>();
-            if (list == null)
-                return result.ToArray();
-
-            result.Add(list.val);
-            while (list.next != null)
-            {
-                list = list.next;
-                result.Add(list.val);
-            }
-            
-
-            return result.ToArray();
+            Console.WriteLine($"\n==>\n{result.ConvertToArray().Format()}");
         }
 
         /// <summary>
@@ -136,17 +119,6 @@ namespace IC.LeetCode.Practice.Problems
         public override string ToString()
         {
             return "21. Merge Two Sorted Lists";
-        }
-    }
-
-    public class ListNode
-    {
-        public int val;
-        public ListNode next;
-        public ListNode(int val = 0, ListNode next = null)
-        {
-            this.val = val;
-            this.next = next;
         }
     }
 }
