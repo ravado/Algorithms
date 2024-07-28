@@ -96,33 +96,11 @@ namespace IC.LeetCode.Practice.Problems
         public ListNode RemoveElementsV2(ListNode head, int val)
         {
             if (head == null)
-                return null;
-
-            do
             {
-                if (head.val == val)
-                {
-                    if(head.next !=null)
-                    {
-                       // head == new ListNode(head.next.val, head.next);
-                    }
-                }
+                return head;
             }
-            while (head.next != null);
-
-            if (head.val == val && head.next == null)
-            {
-                return new ListNode();
-            }
-            else if (head.val == val)
-            {
-                var removed = RemoveElements(head.next?.next, val);
-                return new ListNode(head.next.val, removed);
-            }
-            else
-            {
-                return RemoveElements(head.next, val);
-            }
+            head.next = RemoveElementsV2(head.next, val);
+            return head.val == val ? head.next : head;
         }
 
         public override string ToString()
